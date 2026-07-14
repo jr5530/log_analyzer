@@ -5,7 +5,11 @@ def check_outsiders_ip(data):
     return res
 
 def filter_by_size(data):
-    res = [ log for log in data if int (log[5]) > 5000]
+    res = [log for log in data if int (log[5]) > 5000]
     return res
-print(filter_by_size(reader.read_csv_to_list("network_traffic.log")))
+
+def tag_traffic(data):
+    res = ["LARGE" if int(log[5]) > 5000 else "NORMAL" for log in data]
+    return res
+print(tag_traffic(reader.read_csv_to_list("network_traffic.log")))
 
